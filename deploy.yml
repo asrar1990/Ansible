@@ -2,10 +2,9 @@
 - name: Deploy Application
   hosts: all
   tasks:
-    - name: Copy WAR file to server
-      copy:
-        src: target/MyApp.war
-        dest: /opt/tomcat/webapps/MyApp.war
+    - name: Transfer WAR File
+        run: |
+          scp -i ~/.ssh/id_rsa target/MyApp.war ubuntu@ec2-54-87-51-179.compute-1.amazonaws.com:/opt/tomcat/webapps/MyApp.war
 
     - name: Restart Application
       service:
